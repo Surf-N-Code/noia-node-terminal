@@ -3,7 +3,7 @@ Noia Node guide on Ubuntu using terminal only
 
 This is a quick tutorial for those wanting to host a NOIA node on a virtual box for example. I have used Vultr for this purpose and setup a Ubuntu 16.04 VM.
 
-*Ref link: If you are interested in signing up on Vultr too, you could use my ref link: https://www.vultr.com/?ref=7436414 to sign up. Otherwise just browse to https://www.vultr.com and sign up.
+If you are interested in signing up on Vultr too, you could use my [ref link]() https://www.vultr.com/?ref=7436414) to sign up. Otherwise just browse to [Vultr](https://www.vultr.com and sign up).
 
 If you need help setting up a VM, contact me here.
 
