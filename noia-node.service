@@ -1,0 +1,14 @@
+[Unit]
+Description=NOIA Node
+
+[Service]
+ExecStart=/usr/bin/node /home/noia/noia-node-terminal/index.js
+Restart=always
+User=root
+Group=root
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/home/noia/noia-node-terminal
+
+[Install]
+WantedBy=multi-user.target
