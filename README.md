@@ -30,6 +30,8 @@ I created a new directory below my home directory. You can create it anywhere yo
 
 This is enough to test the installation using:
 
+    npm install
+    
     npm start
 
 A couple of things will happen, in the end you should get an error though. Something like this:
