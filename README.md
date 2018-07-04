@@ -86,7 +86,7 @@ Open the noia-node.service file provided within your installation path
 
     nano noia-node.service
 
-Adjust the ExecStart and WorkinDirectory paths to your node and noia installation paths. See an example os my service file witin this repo.
+Adjust the ExecStart and WorkinDirectory paths to your node and noia installation paths. See an example of my service file witin this repo.
 
 Once done, copy the service file to your /etc/systemd/system directory, adjust its execution rights and restart the systemctl daemon.
 
@@ -100,6 +100,7 @@ Check if everything works
 ------------
 
 To check whether the node is running type
+    
     systemctl | grep noia
 
 You should see something like this:
