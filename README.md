@@ -90,7 +90,7 @@ Adjust the ExecStart and WorkinDirectory paths to your node and noia installatio
 
 Once done, copy the service file to your /etc/systemd/system directory, adjust its execution rights and restart the systemctl daemon.
 
-    cp /home/noia/noia/noia-node-terminal/noia-node.service /etc/systemd/system/
+    cp /home/noia/noia-node-terminal/noia-node.service /etc/systemd/system/
     chmod 664 /etc/systemd/system/noia-node.service
     systemctl daemon-reload
     systemctl enable noia-node.service
