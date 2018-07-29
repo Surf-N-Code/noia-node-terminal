@@ -7,6 +7,10 @@ If you are interested in signing up on Vultr too, you could use my [ref link](ht
 
 If you need help setting up a VM, contact me here.
 
+Register and KYC on the NOIA platform
+-------------
+[Register here](https://dashboard.noia.network/r/14b984b1)
+
 Initial system checks and requirements
 -------------
 We need to make sure that systemd is being used for managing deamons. Run the following command. If your system is using upstart, please refer to this great [tutorial]( https://www.digitalocean.com/community/tutorials/the-upstart-event-system-what-it-is-and-how-to-use-it)
