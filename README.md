@@ -1,4 +1,4 @@
-Noia Node guide on Ubuntu using terminal only
+Noia Node guide on Ubuntu using terminal only UPDATED 2019-08-11
 ==================
 
 This is a quick tutorial for those wanting to host a NOIA node on a virtual box for example. I have used Vultr for this purpose and setup a Ubuntu 16.04 VM.
@@ -26,6 +26,161 @@ Node JS and NPM are required for the noia node to run. Install using the command
     sudo apt-get install build-essential
 
 Noia node installation
+------------
+
+If you want to use globally.
+
+**NOTICE**: You need administrator rights to install globally.
+
+```
+$ npm install @noia-network/node-cli -g
+```
+
+**NOTICE**: If installation fails with administrator rights, then try suppressing the UID/GID switching when running the install command:
+
+```
+$ npm install @noia-network/node-cli -g --unsafe-perm
+```
+
+For the FIRST TIME, you need to define master address. It will generate `node.settings` with defined master address.
+
+```sh
+$ noia-node-cli --masterAddress wss://csl-masters.noia.network:5565
+```
+
+or environment variable
+
+```sh
+NOIA_NODE_MASTER_ADDRESS=wss://csl-masters.noia.network:5565 noia-node-cli
+```
+
+Noia node configuration
+-------------
+
+Find the node.settings file on your system using 
+```
+find / -type f -name "node.settings"
+```
+
+For me it was sitting in 
+```
+/root/.noia-node/node.settings
+```
+
+Open the file using vi
+```
+vi /root/.noia-node/node.settings
+```
+
+and edit the masterAddress to match the following:
+```
+master-address=wss://csl-masters.noia.network:5565
+```
+
+Also edit the airdropAddress if you want to receive the node rewards :).
+Make sure to input your own ERC20 Wallet!!
+```
+airdropAddress=0xfe1ADFa5d31d3F7da12465d1A56823Cd68C03188
+```
+
+Running NOIA
+-------------
+
+You can now try the following
+```
+noia-node-cli start
+```
+It should output something like the following:
+```
+info: [noia-node] Initializing NOIA node, settings-path=/root/.noia-node/node.settings.
+info: [noia-node] Storage dir=/root/.noia-node/storage, allocated=104857600.
+(node:480) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 change listeners added. Use emitter.setMaxListeners() to increase limit
+info: [noia-node] NOIA node initialized.
+info: [noia-node] Connecting to master (without blockchain), master-address=wss://csl-masters.noia.network:5565.
+```
+
+Adding noia node as a service (Important if you want to close the terminal you are working in)
+-------------
+
+Create a file called noia-node.service in the directory: /etc/systemd/system, adjust its execution rights ```chmod 664 /etc/systemd/system/noia-node.service``` and restart the systemctl daemon using: ```systemctl daemon-reload```
+
+Copy the following contents to your service file and ajust the ExecStart and WorkinDirectory paths to your node and noia installation paths. In my case:
+```
+[Unit]
+Description=NOIA Node
+
+[Service]
+ExecStart=/usr/bin/node /usr/local/lib/node_modules/@noia-network/node-cli/dist/index.js
+Restart=always
+User=root
+Group=root
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/usr/local/lib/node_modules/@noia-network/node-cli
+Environment=NOIA_NODE_USER_DATA_PATH=/root/.noia-node
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Restart the deamon
+```
+systemctl daemon-reload
+systemctl enable noia-node.service
+systemctl start noia-node.service
+```
+
+Check if everything works
+------------
+
+To check whether the node is running type
+    
+    systemctl | grep noia
+
+You should see something like this:
+
+    noia-node.service  loaded  active  running NOIA Node
+    
+Also you need to check this:
+```
+sudo systemctl status noia-node.service
+```
+
+If noia is running successfull, it returns something like this:
+```
+root@vultr:~# sudo systemctl status noia-node.service
+● noia-node.service - NOIA Node
+   Loaded: loaded (/etc/systemd/system/noia-node.service; enabled; vendor preset: enabled)
+   Active: active (running) since Thu 2019-07-18 09:46:50 UTC; 3 weeks 3 days ago
+```
+ 
+
+Troubleshooting
+------------
+Try running the following to get more information on the possible error:
+```
+journalctl -u noia-node.service
+```
+
+You can also try:
+```
+sudo systemctl status noia-node.service
+```
+
+If noia is running successfull, it returns something like this:
+```
+root@vultr:~# sudo systemctl status noia-node.service
+● noia-node.service - NOIA Node
+   Loaded: loaded (/etc/systemd/system/noia-node.service; enabled; vendor preset: enabled)
+   Active: active (running) since Thu 2019-07-18 09:46:50 UTC; 3 weeks 3 days ago
+```
+
+Try setting in the node.settings file
+```
+natpmp=true
+```
+
+Old part of the tutorial
 ------------
 I created a new directory below my home directory. You can create it anywhere you like though. I will be using the path: /home/noia in this tutorial.
 
