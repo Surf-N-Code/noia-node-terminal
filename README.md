@@ -27,32 +27,19 @@ Node JS and NPM are required for the noia node to run. Install using the command
 
 Noia node installation
 ------------
+///START This part is taken from the official NOIA documentation. Credits to NOIA.
 
-If you want to use globally.
-
-**NOTICE**: You need administrator rights to install globally.
-
+Install the noia node package globally
 ```
 $ npm install @noia-network/node-cli -g
 ```
 
-**NOTICE**: If installation fails with administrator rights, then try suppressing the UID/GID switching when running the install command:
+If installation fails with administrator rights, then try suppressing the UID/GID switching when running the install command:
 
 ```
 $ npm install @noia-network/node-cli -g --unsafe-perm
 ```
-
-For the FIRST TIME, you need to define master address. It will generate `node.settings` with defined master address.
-
-```sh
-$ noia-node-cli --masterAddress wss://csl-masters.noia.network:5565
-```
-
-or environment variable
-
-```sh
-NOIA_NODE_MASTER_ADDRESS=wss://csl-masters.noia.network:5565 noia-node-cli
-```
+///END
 
 Noia node configuration
 -------------
